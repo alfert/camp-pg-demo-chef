@@ -7,20 +7,22 @@
 # All rights reserved - Do Not Redistribute
 #
 
+conn_db = ({:host => "127.0.0.1", :port => node['postgresql']['port'], :username => 'postgres', :password => node['postgresql']['password']['postgres']})
+
 # create a postgresql database
 postgresql_database 'camp2012db' do
-  connection ({:host => "127.0.0.1", :port => 5432, :username => 'postgres', :password => node['postgresql']['password']['postgres']})
+  connection conn_db
   action :create
 end
 
 postgresql_database_user 'zeg' do
-	connection ({:host => "127.0.0.1", :port => 5432, :username => 'postgres', :password => node['postgresql']['password']['postgres']})
+	connection conn_db
 	password 'geheim!'
 	action :create
 end;
 
 postgresql_database_user 'zeg' do
-	connection ({:host => "127.0.0.1", :port => 5432, :username => 'postgres', :password => node['postgresql']['password']['postgres']})
+	connection conn_db
 	password 'geheim!'
     database_name 'camp2012db'
 #    host '%'
